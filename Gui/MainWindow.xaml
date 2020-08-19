@@ -98,7 +98,7 @@
                             Content="Edit"
                             FontFamily="Myriad Pro"
                             FontWeight="Bold"
-                            Click="EditOrderButton_Click">
+                            Click="EditOrderButton_ClickAsync">
                     </Button>
                 </StackPanel>
                 <StackPanel>

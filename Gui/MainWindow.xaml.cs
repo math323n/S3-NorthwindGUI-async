@@ -1,5 +1,7 @@
 ﻿using DataAccess;
+
 using Entities;
+
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -24,18 +26,22 @@ namespace Gui
     public partial class MainWindow: Window
     {
 
-       
         ViewModel viewModel;
 
         public MainWindow()
         {
             InitializeComponent();
-            viewModel = new ViewModel();
+            LoadStuff();
+        }
+
+        private async Task LoadStuff()
+        {
+            await Task.Run(() => viewModel = new ViewModel());
             DataContext = viewModel;
-            GetComboBoxItems();
+            GetComboBoxItemsASync();
             DisAllowEditing();
         }
-        
+
         private void AllowEditOrder()
         {
 
@@ -89,12 +95,12 @@ namespace Gui
                     textBoxShipCountry.Text, orderDetails));
 
                 Repository repository = new Repository();
-               await Task.Run(() => repository.AddOrder(order));
+                await Task.Run(() => repository.AddOrder(order));
                 await Task.Run(() => viewModel.Orders.Add(order));
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                await Task.Run(() => MessageBox.Show(ex.Message));
             }
         }
 
@@ -110,7 +116,7 @@ namespace Gui
             }
             for(int i = 0; i < 10; i++)
             {
-               await Task.Run(() => comboBoxEmployeeID.Items.Add(i));
+                await Task.Run(() => comboBoxEmployeeID.Items.Add(i));
             }
             for(int i = 200; i < 212; i++)
             {
@@ -126,6 +132,6 @@ namespace Gui
             await Task.Run(() => AllowEditOrder());
         }
 
-     
+
     }
 }

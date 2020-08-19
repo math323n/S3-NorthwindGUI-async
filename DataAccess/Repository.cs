@@ -198,7 +198,7 @@ namespace DataAccess
         /// Gets all orders.
         /// </summary>
         /// <returns>A list of all orders</returns>
-        public async Task<List<Order>> GetAllOrders()
+        public async Task<List<Order>> GetAllOrdersASync()
         {
             List<Order> orders = new List<Order>();
             string query = "SELECT * FROM Orders";
