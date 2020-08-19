@@ -74,22 +74,23 @@ namespace Gui
         }
 
 
-        private void NewOrderButton_Click(object sender, RoutedEventArgs e)
+        private async void NewOrderButton_Click(object sender, RoutedEventArgs e)
         {
             List<OrderDetail> orderDetails = new List<OrderDetail>();
+
             try
             {
                 int.TryParse(comboBoxEmployeeID.Text, out int employeeID);
                 int.TryParse(comboBoxShipVia.Text, out int shipVia);
                 decimal.TryParse(textBoxFreight.Text, out decimal freight);
-                Order order = new Order(1, comboBoxCustomerID.Text, employeeID, datePickerOrderDate.SelectedDate.Value.Date,
+                Order order = await Task.Run(() => new Order(1, comboBoxCustomerID.Text, employeeID, datePickerOrderDate.SelectedDate.Value.Date,
                     datePickerOrderDate.SelectedDate.Value.Date, datePickerOrderDate.SelectedDate.Value.Date, shipVia, freight,
                     textBoxShipName.Text, textBoxShipAddress.Text, textBoxShipCity.Text, textBoxShipRegion.Text, textBoxShipPostalCode.Text,
-                    textBoxShipCountry.Text, orderDetails);
+                    textBoxShipCountry.Text, orderDetails));
 
                 Repository repository = new Repository();
-                repository.AddOrder(order);
-                viewModel.Orders.Add(order);
+               await Task.Run(() => repository.AddOrder(order));
+                await Task.Run(() => viewModel.Orders.Add(order));
             }
             catch(Exception ex)
             {
@@ -97,32 +98,32 @@ namespace Gui
             }
         }
 
-        private void GetComboBoxItems()
+        private async void GetComboBoxItemsASync()
         {
             for(int i = 0; i < viewModel.Orders.Count; i++)
             {
-                comboBoxOrderID.Items.Add(viewModel.Orders[i].OrderID);
+                await Task.Run(() => comboBoxOrderID.Items.Add(viewModel.Orders[i].OrderID));
             }
             for(int i = 0; i < viewModel.Orders.Count; i++)
             {
-                comboBoxCustomerID.Items.Add(viewModel.Orders[i].CustomerID);
+                await Task.Run(() => comboBoxCustomerID.Items.Add(viewModel.Orders[i].CustomerID));
             }
             for(int i = 0; i < 10; i++)
             {
-                comboBoxEmployeeID.Items.Add(i);
+               await Task.Run(() => comboBoxEmployeeID.Items.Add(i));
             }
             for(int i = 200; i < 212; i++)
             {
-                comboBoxEmployeeID.Items.Add(i);
+                await Task.Run(() => comboBoxEmployeeID.Items.Add(i));
             }
             for(int i = 0; i < 4; i++)
             {
-                comboBoxShipVia.Items.Add(i);
+                await Task.Run(() => comboBoxShipVia.Items.Add(i));
             }
         }
-        private void EditOrderButton_Click(object sender, RoutedEventArgs e)
+        private async void EditOrderButton_ClickAsync(object sender, RoutedEventArgs e)
         {
-            AllowEditOrder();
+            await Task.Run(() => AllowEditOrder());
         }
 
      
