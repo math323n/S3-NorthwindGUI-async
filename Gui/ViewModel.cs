@@ -13,22 +13,26 @@ namespace Gui
 {
     public class ViewModel
     {
-        Repository repository = new Repository();
 
-        public async void ViewModelObj()
+        protected Repository repository;
+
+        protected ObservableCollection<Order> orders;
+        public ViewModel()
         {
+            repository = new Repository();
 
-
-            List<Order> orders = await Task.Run(() => repository.GetAllOrdersASync());
-            List<OrderDetail> orderDetails = repository.GetAllOrderDetails();
-
-
-            OrderDetails = new ObservableCollection<OrderDetail>(orderDetails);
-            Orders = new ObservableCollection<Order>(orders);
+            InitializeAsync();
 
         }
 
-        public ObservableCollection<Order> Orders { get; set; }
+        public virtual async void InitializeAsync()
+        {
+            // Initialize ObservableCollections
+            Orders = new ObservableCollection<Order>(await repository.GetAllOrdersASync());
+  
+        }
+
+        public ObservableCollection<Order> Orders { get { return orders; } set { orders = value; } }
 
 
         public ObservableCollection<OrderDetail> OrderDetails { get; set; }

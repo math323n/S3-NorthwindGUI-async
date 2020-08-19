@@ -25,22 +25,20 @@ namespace Gui
     /// </summary>
     public partial class MainWindow: Window
     {
-
-        ViewModel viewModel;
+        protected Repository repository;
+        protected ViewModel viewModel;
 
         public MainWindow()
         {
-            InitializeComponent();
-            LoadStuff();
-        }
-
-        private async Task LoadStuff()
-        {
-            await Task.Run(() => viewModel = new ViewModel());
+           
+            repository = new Repository();
+            viewModel = new ViewModel();
             DataContext = viewModel;
-            GetComboBoxItemsASync();
+            InitializeComponent();
+
             DisAllowEditing();
         }
+
 
         private void AllowEditOrder()
         {
@@ -104,7 +102,7 @@ namespace Gui
             }
         }
 
-        private async void GetComboBoxItemsASync()
+        private async Task GetComboBoxItemsASync()
         {
             for(int i = 0; i < viewModel.Orders.Count; i++)
             {

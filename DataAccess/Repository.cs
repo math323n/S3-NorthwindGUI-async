@@ -34,7 +34,6 @@ namespace DataAccess
                 throw new Exception("Data access error. See inner exception for details", e);
             }
         }
-        #endregion
 
 
         #region Helper Methods
@@ -51,14 +50,14 @@ namespace DataAccess
                 throw new ArgumentException("Null or whitespace.");
             }
             DataSet resultSet = new DataSet();
-           
-                SqlConnection connection = GetConnection(connectionString) as SqlConnection;
-                using(SqlDataAdapter adapter = new SqlDataAdapter(new SqlCommand(query, connection)))
-                {
-                    adapter.Fill(resultSet);
-                }
-                return resultSet;
-          
+
+            SqlConnection connection = GetConnection(connectionString) as SqlConnection;
+            using(SqlDataAdapter adapter = new SqlDataAdapter(new SqlCommand(query, connection)))
+            {
+                adapter.Fill(resultSet);
+            }
+            return resultSet;
+
         }
         /// <summary>
         /// Creates a connection based on the name of the input parameter connection string.
@@ -159,7 +158,7 @@ namespace DataAccess
 
             string query = $"SELECT * FROM [Order Details] WHERE OrderID = {orderID}";
             Repository repository = new Repository();
-            DataSet orderDetails =  await Task.Run(() => repository.Execute(query));
+            DataSet orderDetails = await Task.Run(() => repository.Execute(query));
             List<OrderDetail> orderDetailList = new List<OrderDetail>();
             if(orderDetails.Tables.Count > 0 && orderDetails.Tables[0].Rows.Count > 0)
             {
@@ -269,5 +268,6 @@ namespace DataAccess
                 throw;
             }
         }
+        #endregion
     }
 }
