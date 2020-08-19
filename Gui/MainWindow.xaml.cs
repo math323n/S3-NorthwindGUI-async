@@ -38,7 +38,7 @@ namespace Gui
         
         private void AllowEditOrder()
         {
-            
+
             comboBoxOrderID.IsReadOnly = false;
             comboBoxCustomerID.IsReadOnly = false;
             comboBoxEmployeeID.IsReadOnly = false;

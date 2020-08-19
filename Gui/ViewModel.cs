@@ -4,20 +4,21 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Gui
 {
    public class ViewModel
     {
 
-        public ViewModel()
+        public async void ViewModelObj()
         {
             Repository repository = new Repository();
 
-            List<Order> orders = repository.GetAllOrders();
+            List<Order> orders = await Task.Run(() => repository.GetAllOrders());
             List<OrderDetail> orderDetails = repository.GetAllOrderDetails();
 
-            Orders = new ObservableCollection<Order>(orders);
+            ObservableCollection<Order> orders = new ObservableCollection<Order>(orders);
             OrderDetails = new ObservableCollection<OrderDetail>(orderDetails);
 
         }
