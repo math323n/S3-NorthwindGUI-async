@@ -142,15 +142,18 @@ namespace DataAccess
             // Execute the query
             DataSet details = await repository.ExecuteAsync(query);
 
-            // If the query returned any results
-            if(details.Tables.Count > 0 && details.Tables[0].Rows.Count > 0)
-            {
-                foreach(DataRow resultDataRow in details.Tables[0].Rows)
+            await Task.Run(async () => {
+                if(details.Tables.Count > 0 && details.Tables[0].Rows.Count > 0)
                 {
-                    OrderDetail detail = await Task.Factory.StartNew(() => ExtractOrderDetailsFrom(resultDataRow));
-                    orderDetails.Add(detail);
+                    foreach(DataRow resultDataRow in details.Tables[0].Rows)
+                    {
+                        OrderDetail detail = await Task.Factory.StartNew(() => ExtractOrderDetailsFrom(resultDataRow));
+                        orderDetails.Add(detail);
+                    }
                 }
-            }
+            } );
+            // If the query returned any results
+           
 
             // Create the order object
             Order order = new Order(orderID, customerID, employeeID, orderDate, requiredDate, shippedDate,
@@ -197,11 +200,17 @@ namespace DataAccess
             }
             if(resultSet.Tables.Count > 0 && resultSet.Tables[0].Rows.Count > 0)
             {
+                await Task.Run(async () =>
+                { 
+
                 foreach(DataRow dataRow in resultSet.Tables[0].Rows)
                 {
                     Order order = await ExtractOrderFromAsync(dataRow);
                     orders.Add(order);
                 }
+                
+                });
+
             }
             return orders;
         }

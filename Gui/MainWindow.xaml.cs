@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace Gui
 {
@@ -72,6 +73,10 @@ namespace Gui
         /// <returns></returns>
         private async Task GetComboBoxItemsASync()
         {
+            Dispatcher.Invoke(new Action(async delegate
+            {
+               
+          
             for(int i = 0; i < viewModel.Orders.Count; i++)
             {
                 await Task.Run(() => comboBoxOrderID.Items.Add(viewModel.Orders[i].OrderID));
@@ -92,6 +97,7 @@ namespace Gui
             {
                 await Task.Run(() => comboBoxShipVia.Items.Add(i));
             }
+            }), DispatcherPriority.Normal);
         }
         #endregion
 
