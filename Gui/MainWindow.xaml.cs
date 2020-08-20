@@ -1,13 +1,9 @@
 ﻿using DataAccess;
-
 using Entities;
-
 using System;
 using System.Collections.Generic;
-
 using System.Threading.Tasks;
 using System.Windows;
-
 
 namespace Gui
 {
@@ -16,18 +12,22 @@ namespace Gui
     /// </summary>
     public partial class MainWindow: Window
     {
-     
-        protected  ViewModel viewModel;
+        #region fields
+        protected ViewModel viewModel;
         protected Repository repository;
+        #endregion
 
+        #region Constructor for MainWindow
         public MainWindow()
         {
             InitializeComponent();
-
-           
         }
+        #endregion
 
-
+        #region Methods
+        /// <summary>
+        /// Allow to Edit properties inside of window
+        /// </summary>
         private void AllowEditOrder()
         {
             comboBoxOrderID.IsReadOnly = false;
@@ -45,6 +45,9 @@ namespace Gui
             textBoxShipPostalCode.IsReadOnly = false;
             textBoxShipCountry.IsReadOnly = false;
         }
+        /// <summary>
+        /// Disallow to Edit properties inside of window
+        /// </summary>
         private void DisAllowEditing()
         {
             comboBoxOrderID.IsReadOnly = true;
@@ -63,7 +66,41 @@ namespace Gui
             textBoxShipCountry.IsReadOnly = true;
         }
 
+        /// <summary>
+        /// Get comboBox items async
+        /// </summary>
+        /// <returns></returns>
+        private async Task GetComboBoxItemsASync()
+        {
+            for(int i = 0; i < viewModel.Orders.Count; i++)
+            {
+                await Task.Run(() => comboBoxOrderID.Items.Add(viewModel.Orders[i].OrderID));
+            }
+            for(int i = 0; i < viewModel.Orders.Count; i++)
+            {
+                await Task.Run(() => comboBoxCustomerID.Items.Add(viewModel.Orders[i].CustomerID));
+            }
+            for(int i = 0; i < 10; i++)
+            {
+                await Task.Run(() => comboBoxEmployeeID.Items.Add(i));
+            }
+            for(int i = 200; i < 212; i++)
+            {
+                await Task.Run(() => comboBoxEmployeeID.Items.Add(i));
+            }
+            for(int i = 0; i < 4; i++)
+            {
+                await Task.Run(() => comboBoxShipVia.Items.Add(i));
+            }
+        }
+        #endregion
 
+        #region EventHandlers
+        /// <summary>
+        /// Button EventHandler for adding a new item to DataBase
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void NewOrderButton_Click(object sender, RoutedEventArgs e)
         {
             List<OrderDetail> orderDetails = new List<OrderDetail>();
@@ -88,47 +125,40 @@ namespace Gui
             }
         }
 
-        private async Task GetComboBoxItemsASync()
-        {
-            for(int i = 0; i < viewModel.Orders.Count; i++)
-            {
-                await Task.Run(() => comboBoxOrderID.Items.Add(viewModel.Orders[i].OrderID));
-            }
-            for(int i = 0; i < viewModel.Orders.Count; i++)
-            {
-                await Task.Run(() => comboBoxCustomerID.Items.Add(viewModel.Orders[i].CustomerID));
-            }
-            for(int i = 0; i < 10; i++)
-            {
-                await Task.Run(() => comboBoxEmployeeID.Items.Add(i));
-            }
-            for(int i = 200; i < 212; i++)
-            {
-                await Task.Run(() => comboBoxEmployeeID.Items.Add(i));
-            }
-            for(int i = 0; i < 4; i++)
-            {
-                await Task.Run(() => comboBoxShipVia.Items.Add(i));
-            }
-        }
+        /// <summary>
+        /// Button EventHandler for editing an existing item in DataBase
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void EditOrderButton_ClickAsync(object sender, RoutedEventArgs e)
         {
             await Task.Run(() => AllowEditOrder());
         }
 
+        /// <summary>
+        /// EventHandler for when Window is loaded.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             
+            // viewmodel
             viewModel = new ViewModel();
-            await viewModel.InitializeAsync();
 
-            // Assign viewModel to DataContext
+            // Assign the viewModel to DataContext
             DataContext = viewModel;
 
-          
+            // Start repository
             repository = new Repository();
-            await viewModel.InitializeAsync(); DisAllowEditing();
-        }
 
+            /* ViewModel method for getting data, will link to GetAllOrdersAsync, 
+             * then retrieves all orders async all the way.*/
+            await viewModel.InitializeAsync();
+
+            // Disable all textbox' for editing
+            DisAllowEditing();
+        }
+        #endregion
     }
 }
