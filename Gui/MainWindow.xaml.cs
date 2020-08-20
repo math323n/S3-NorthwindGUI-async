@@ -17,18 +17,14 @@ namespace Gui
     public partial class MainWindow: Window
     {
      
-        private readonly ViewModel viewModel;
-        private readonly Repository repository;
+        protected  ViewModel viewModel;
+        protected Repository repository;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            viewModel = new ViewModel();
-            DataContext = viewModel;
-
-            repository = new Repository();
-            DisAllowEditing();
+           
         }
 
 
@@ -120,6 +116,19 @@ namespace Gui
             await Task.Run(() => AllowEditOrder());
         }
 
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            
+            viewModel = new ViewModel();
+            await viewModel.InitializeAsync();
+
+            // Assign viewModel to DataContext
+            DataContext = viewModel;
+
+          
+            repository = new Repository();
+            await viewModel.InitializeAsync(); DisAllowEditing();
+        }
 
     }
 }

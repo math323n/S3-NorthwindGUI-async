@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Gui
 {
-    public class ViewModel : INotifyPropertyChanged
+    public class ViewModel: INotifyPropertyChanged
     {
 
         protected Repository repository;
@@ -25,8 +25,6 @@ namespace Gui
         public ViewModel()
         {
             repository = new Repository();
-
-            InitializeAsync();
 
         }
         public virtual ObservableCollection<Order> Orders
@@ -65,8 +63,7 @@ namespace Gui
             }
         }
 
-
-        public virtual async void InitializeAsync()
+        public virtual async Task InitializeAsync()
         {
             // Initialize ObservableCollections
             Orders = new ObservableCollection<Order>(await repository.GetAllOrdersAsync());
