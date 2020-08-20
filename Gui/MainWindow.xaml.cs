@@ -151,6 +151,7 @@ namespace Gui
 
             // Start repository
             repository = new Repository();
+           await repository.InitRepository();
 
             /* ViewModel method for getting data, will link to GetAllOrdersAsync, 
              * then retrieves all orders async all the way.*/

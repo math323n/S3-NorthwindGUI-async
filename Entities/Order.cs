@@ -6,6 +6,7 @@ namespace Entities
 {
     public class Order
     {
+        #region Fields
         protected int orderID;
         protected string customerID;
         protected int employeeID;
@@ -21,7 +22,27 @@ namespace Entities
         protected string shipPostalCode; 
         protected string shipCountry; 
         protected List<OrderDetail> orderDetails;
+        #endregion
 
+        #region Constructor
+        /// <summary>
+        /// Constructor for Order object
+        /// </summary>
+        /// <param name="orderID"></param>
+        /// <param name="customerID"></param>
+        /// <param name="employeeID"></param>
+        /// <param name="orderDate"></param>
+        /// <param name="requiredDate"></param>
+        /// <param name="shippedDate"></param>
+        /// <param name="shipVia"></param>
+        /// <param name="freight"></param>
+        /// <param name="shipName"></param>
+        /// <param name="shipAddress"></param>
+        /// <param name="shipCity"></param>
+        /// <param name="shipRegion"></param>
+        /// <param name="shipPostalCode"></param>
+        /// <param name="shipCountry"></param>
+        /// <param name="orderDetails"></param>
         public Order(int orderID, string customerID, int employeeID, DateTime orderDate, DateTime requiredDate, DateTime shippedDate,
             int shipVia, decimal freight, string shipName, string shipAddress, string shipCity,
             string shipRegion, string shipPostalCode, string shipCountry, List<OrderDetail> orderDetails)
@@ -42,9 +63,9 @@ namespace Entities
             ShipCountry = shipCountry;
             OrderDetails = orderDetails;
         }
+        #endregion
 
-
-
+        #region Properties
         public virtual int OrderID
         {
             get
@@ -52,8 +73,7 @@ namespace Entities
                 return orderID;
             }
             set
-            {
-               
+            {           
                 if(orderID != value)
                 {
                     orderID = value;
@@ -83,8 +103,7 @@ namespace Entities
             }
 
             set
-            {
-               
+            {   
                 if(customerID != value)
                 {
                     customerID = value;
@@ -272,7 +291,7 @@ namespace Entities
                 }
             }
         }
+        #endregion
 
-        
     }
 }

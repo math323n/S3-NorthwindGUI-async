@@ -25,10 +25,14 @@ namespace DataAccess
         /// </summary>
         public Repository()
         {
-            InitRepository();
+            
         }
 
-        public virtual async void InitRepository()
+        /// <summary>
+        /// Initialize the Repository, try get Connection, else catch Exception
+        /// </summary>
+        /// <returns></returns>
+        public virtual async Task InitRepository()
         {
             try
             {
@@ -40,7 +44,7 @@ namespace DataAccess
                 throw new Exception("Data access error. See inner exception for details", e);
             }
         }
-
+        #endregion
 
         #region Helper Methods
         /// <summary>
@@ -102,8 +106,9 @@ namespace DataAccess
                 return (false, e);
             }
         }
+        #endregion
 
-
+        #region Repository Methods
         /// <summary>
         /// Extract all data relevant to an order from a data row object, and return an order object.
         /// </summary>
@@ -172,12 +177,6 @@ namespace DataAccess
 
             return orderDetails;
         }
-        #endregion
-
-
-        #region Repository Methods
-
-        #endregion
 
         // <summary>
         /// Gets all orders.
@@ -225,5 +224,6 @@ namespace DataAccess
             }
         }
         #endregion
+
     }
 }
