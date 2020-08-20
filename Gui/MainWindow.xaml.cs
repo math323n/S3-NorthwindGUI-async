@@ -28,12 +28,12 @@ namespace Gui
             DataContext = viewModel;
 
             repository = new Repository();
+            DisAllowEditing();
         }
 
 
         private void AllowEditOrder()
         {
-
             comboBoxOrderID.IsReadOnly = false;
             comboBoxCustomerID.IsReadOnly = false;
             comboBoxEmployeeID.IsReadOnly = false;

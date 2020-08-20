@@ -21,7 +21,7 @@ namespace DataAccess
 
         #region Constructors
         /// <summary>
-        /// Initializes a new instance of Repository. Attempts to establish a connection, and will throw an exception on connection error.
+        /// Initializes a new instance of Repository. Attempts to establish a consnection, and will throw an exception on connection error.
         /// </summary>
         public Repository()
         {
@@ -154,6 +154,7 @@ namespace DataAccess
             // Return the created order object
             return order;
         }
+
         /// <summary>
         /// Extract all data relevant to an order detail from a dat row object, and return an order detail object.
         /// </summary>

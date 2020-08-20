@@ -53,11 +53,7 @@ namespace Entities
             }
             set
             {
-                (bool isValid, string errorMessage) = Validations.ValidateIsNegative(value);
-                if(!isValid)
-                {
-                    throw new ArgumentException(nameof(OrderID), errorMessage);
-                }
+               
                 if(orderID != value)
                 {
                     orderID = value;
@@ -88,11 +84,7 @@ namespace Entities
 
             set
             {
-                (bool isValid, string errorMessage) = Validations.ValidateForNullOrWhitespace(value);
-                if(!isValid)
-                {
-                    throw new ArgumentException(nameof(CustomerID), errorMessage);
-                }
+               
                 if(customerID != value)
                 {
                     customerID = value;

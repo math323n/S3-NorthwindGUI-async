@@ -69,11 +69,7 @@ namespace Entities
             }
             set
             {
-                (bool isValid, string errorMessage) = Validations.ValidateIsNegative(value);
-                if(!isValid)
-                {
-                    throw new ArgumentException(nameof(Quantity), errorMessage);
-                }
+               
                 if(value != quantity)
                 {
                     quantity = value;
