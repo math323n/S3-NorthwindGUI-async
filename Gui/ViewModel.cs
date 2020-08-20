@@ -17,6 +17,7 @@ namespace Gui
         protected Repository repository;
 
         protected ObservableCollection<Order> orders;
+        protected Order selectedOrder;
         public ViewModel()
         {
             repository = new Repository();
@@ -28,16 +29,28 @@ namespace Gui
         public virtual async void InitializeAsync()
         {
             // Initialize ObservableCollections
-            Orders = new ObservableCollection<Order>(await repository.GetAllOrdersASync());
-  
+            Orders = new ObservableCollection<Order>(await repository.GetAllOrdersAsync());
+
         }
 
-        public ObservableCollection<Order> Orders { get { return orders; } set { orders = value; } }
+        public virtual ObservableCollection<Order> Orders
+        {
+            get
+            {
+                return orders;
+            }
+            set
+            {
+                if(orders != value)
+                {
+                    orders = value;
+                }
+            }
+        }
 
+        public virtual ObservableCollection<OrderDetail> OrderDetails { get; set; }
 
-        public ObservableCollection<OrderDetail> OrderDetails { get; set; }
-
-        public Order SelectedOrder { get; set; }
-        public OrderDetail SelectedOrderDetail { get; set; }
+        public virtual Order SelectedOrder { get; set; }
+        public virtual OrderDetail SelectedOrderDetail { get; set; }
     }
 }

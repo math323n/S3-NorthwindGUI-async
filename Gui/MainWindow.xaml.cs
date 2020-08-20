@@ -4,19 +4,10 @@ using Entities;
 
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
+
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
 
 namespace Gui
 {
@@ -25,18 +16,18 @@ namespace Gui
     /// </summary>
     public partial class MainWindow: Window
     {
-        protected Repository repository;
-        protected ViewModel viewModel;
+     
+        private readonly ViewModel viewModel;
+        private readonly Repository repository;
 
         public MainWindow()
         {
-           
-            repository = new Repository();
-            viewModel = new ViewModel();
-            DataContext = viewModel;
             InitializeComponent();
 
-            DisAllowEditing();
+            viewModel = new ViewModel();
+            DataContext = viewModel;
+
+            repository = new Repository();
         }
 
 
@@ -60,7 +51,6 @@ namespace Gui
         }
         private void DisAllowEditing()
         {
-
             comboBoxOrderID.IsReadOnly = true;
             comboBoxCustomerID.IsReadOnly = true;
             comboBoxEmployeeID.IsReadOnly = true;
