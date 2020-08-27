@@ -156,6 +156,7 @@ namespace Gui
 
             // Disable all textbox' for editing
             DisAllowEditing();
+            await viewModel.InitializeAsync();
             GetComboBoxItemsASync();
         }
         #endregion

@@ -397,7 +397,7 @@
                                FontFamily="Myriad Pro"
                                FontWeight="Thin"></TextBlock>
                     <TextBox x:Name="textBoxOrderDetailOrderID"
-                             Text="{Binding SelectedOrderDetail.OrderId}"
+                             Text="{Binding SelectedOrder.SelectedOrderDetails.OrderId}"
                              Width="150"
                              IsReadOnly="True"></TextBox>
                 </StackPanel>

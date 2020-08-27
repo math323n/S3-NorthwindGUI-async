@@ -2,6 +2,7 @@
 
 using Entities;
 
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -11,36 +12,119 @@ using System.Threading.Tasks;
 
 namespace Gui
 {
-    public class ViewModel
+    public class ViewModel: INotifyPropertyChanged
     {
+        protected Repository<Orders> orderRepository;
+        protected ObservableCollection<Orders> orders;
+        protected ObservableCollection<OrderDetails> orderDetails;
+        protected Orders selectedOrder;
+        protected OrderDetail selectedOrderDetail;
+
+        protected NorthwindContext context;
 
 
         #region Constructor for ViewModel
         public ViewModel()
         {
-            NorthwindContext context = new NorthwindContext();
-            OrderRepository repository = new OrderRepository(context);
-            IEnumerable<Orders> orders = repository.GetAll();
-            Orders = new ObservableCollection<Orders>(orders);
-           
+
+
         }
         #endregion
 
-        #region Properties
-        public virtual ObservableCollection<Orders> Orders
+
+        public virtual async Task InitializeAsync()
         {
-            get; set;
+            try
+            {
+                await Task.Run(() =>
+                {
+                    RepositoryFactory<OrderRepository, Orders> factory = RepositoryFactory<OrderRepository, Orders>.GetInstance();
+                    OrderRepository repo = factory.Create();
+
+                    IEnumerable<Orders> orders = repo.GetAll();
+
+
+
+
+
+                    // Initialize ObservableCollections
+                    Orders = new ObservableCollection<Orders>(orders);
+                    //OrderDetails = new ObservableCollection<OrderDetails>(orderDetails);
+
+                });
+            }
+            catch(Exception)
+            {
+                throw;
+            }
+        }
+
+        #region Properties
+        public ObservableCollection<Orders> Orders
+        {
+            get
+            {
+                return orders;
+            }
+            set
+            {
+                if(orders != value)
+                {
+                    orders = value;
+
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public ObservableCollection<OrderDetails> OrderDetails
+        {
+            get
+            {
+                return orderDetails;
+            }
+            set
+            {
+                if(orderDetails != value)
+                {
+                    orderDetails = value;
+
+                    NotifyPropertyChanged();
+                }
+            }
 
         }
 
-        public virtual ObservableCollection<OrderDetails> OrderDetails { get; set; }
+
 
         public virtual Orders SelectedOrder
         {
-            get; set;
+            get
+            {
+                return selectedOrder;
+            }
+            set
+            {
+                if(selectedOrder != value)
+                {
+                    selectedOrder = value;
+
+                    NotifyPropertyChanged();
+                }
+            }
         }
-        public ICollection<OrderDetails> SelectedOrderDetail { get; set; }
- 
+        public ICollection<OrderDetails> SelectedOrderDetails { get; set; }
+        #region INotifyPropertyChanged Implementation
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            if(PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+        #endregion
     }
 }
 #endregion

@@ -14,6 +14,11 @@ namespace DataAccess
         {
 
         }
+
+        public OrderRepository()
+        {
+
+        }
         public override IEnumerable<Orders> GetAll()
         {
             IEnumerable<Orders> orders = context.Orders.Include("OrderDetails");
