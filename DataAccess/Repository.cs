@@ -18,10 +18,9 @@ namespace DataAccess
     {
 
         #region Fields and constants
-        const string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Northwind;Integrated Security=True;Connect Timeout=5;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-
+       
         protected NorthwindContext context;
-        private DbSet<T> entities = null;
+
         #endregion
 
 
@@ -32,8 +31,8 @@ namespace DataAccess
         public Repository(NorthwindContext context)
         {
             Context = context;
-            entities = context.Set<T>();
         }
+        public Repository() { }
 
         /// <summary>
         /// Initialize the Repository, try get Connection, else catch Exception
@@ -62,7 +61,7 @@ namespace DataAccess
             {
                 return context;
             }
-            protected set
+            set
             {
                 context = value;
             }

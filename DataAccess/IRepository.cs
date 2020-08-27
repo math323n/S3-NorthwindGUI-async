@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entities;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -14,5 +15,6 @@ namespace DataAccess
         void Add(T t);
         void Delete(T t);
 
+        NorthwindContext Context { get; set; }
     }
 }
