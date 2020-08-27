@@ -72,32 +72,32 @@ namespace DataAccess
 
 
         #region Methods
-        public IEnumerable<T> GetAll()
+        public virtual IEnumerable<T> GetAll()
         {
             return context.Set<T>();
         }
 
-        public T GetBy(int id)
+        public virtual T GetBy(int id)
         {
             return context.Set<T>().Find(id);
         }
 
-        public void Update(T t)
+        public virtual void Update(T t)
         {
             context.SaveChanges();
         }
 
-        public void Edit(T t)
+        public virtual void Edit(T t)
         {
             throw new NotImplementedException();
         }
-        public void Add(T t)
+        public virtual void Add(T t)
         {
             context.Set<T>().Add(t);
             context.SaveChanges();
         }
 
-        public void Delete(T t)
+        public virtual void Delete(T t)
         {
             context.Set<T>().Remove(t);
             context.SaveChanges();

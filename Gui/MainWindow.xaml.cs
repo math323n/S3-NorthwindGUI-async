@@ -149,19 +149,14 @@ namespace Gui
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             
-            // viewmodel
-            viewModel = new ViewModel();
+        
 
-            // Assign the viewModel to DataContext
-            DataContext = viewModel;
+         
 
             // Start repository
-            Repository repo = new Repository(new NorthwindContext());
-            repo.InitRepository();
-
-            /* ViewModel method for getting data, will link to GetAllOrdersAsync, 
-             * then retrieves all orders async all the way.*/
-            await viewModel.InitializeAsync();
+            await Task.Run(() => viewModel = new ViewModel());
+            // Assign the viewModel to DataContext
+            DataContext = viewModel;
 
             // Disable all textbox' for editing
             DisAllowEditing();
