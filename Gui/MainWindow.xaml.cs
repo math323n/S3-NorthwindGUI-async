@@ -71,34 +71,33 @@ namespace Gui
         /// Get comboBox items async
         /// </summary>
         /// <returns></returns>
-     /*   private async Task GetComboBoxItemsASync()
+        private void GetComboBoxItemsASync()
         {
-            Dispatcher.Invoke(new Action(async delegate
-            {
-               
-          
-            for(int i = 0; i < viewModel.Orders.Count; i++)
-            {
-                await Task.Run(() => comboBoxOrderID.Items.Add(viewModel.Orders[i].OrderID));
-            }
-            for(int i = 0; i < viewModel.Orders.Count; i++)
-            {
-                await Task.Run(() => comboBoxCustomerID.Items.Add(viewModel.Orders[i].CustomerID));
-            }
-            for(int i = 0; i < 10; i++)
-            {
-                await Task.Run(() => comboBoxEmployeeID.Items.Add(i));
-            }
-            for(int i = 200; i < 212; i++)
-            {
-                await Task.Run(() => comboBoxEmployeeID.Items.Add(i));
-            }
-            for(int i = 0; i < 4; i++)
-            {
-                await Task.Run(() => comboBoxShipVia.Items.Add(i));
-            }
-            }), DispatcherPriority.Normal);
-        }*/
+            
+
+                for(int i = 0; i < viewModel.Orders.Count; i++)
+                {
+                    comboBoxOrderID.Items.Add(viewModel.Orders[i].OrderId);
+                }
+
+                for(int i = 0; i < viewModel.Orders.Count; i++)
+                {
+                    comboBoxCustomerID.Items.Add(viewModel.Orders[i].CustomerId);
+                }
+                for(int i = 0; i < 10; i++)
+                {
+                   comboBoxEmployeeID.Items.Add(i);
+                }
+                for(int i = 200; i < 212; i++)
+                {
+                    comboBoxEmployeeID.Items.Add(i);
+                }
+                for(int i = 0; i < 4; i++)
+                {
+                    comboBoxShipVia.Items.Add(i);
+                }
+            
+        }
         #endregion
 
         #region EventHandlers
@@ -107,7 +106,7 @@ namespace Gui
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-       /* private async void NewOrderButton_Click(object sender, RoutedEventArgs e)
+       /*private async void NewOrderButton_Click(object sender, RoutedEventArgs e)
         {
             List<OrderDetail> orderDetails = new List<OrderDetail>();
 
@@ -160,6 +159,7 @@ namespace Gui
 
             // Disable all textbox' for editing
             DisAllowEditing();
+            GetComboBoxItemsASync();
         }
         #endregion
     }

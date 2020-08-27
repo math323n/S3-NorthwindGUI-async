@@ -32,10 +32,10 @@
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="ID"
-                                        DisplayMemberBinding="{Binding OrderID}"
+                                        DisplayMemberBinding="{Binding OrderId}"
                                         Width="55" />
                         <GridViewColumn Header="CustomerID"
-                                        DisplayMemberBinding="{Binding CustomerID}"
+                                        DisplayMemberBinding="{Binding CustomerId}"
                                         Width="80" />
                         <GridViewColumn Header="Order Date"
                                         DisplayMemberBinding="{Binding OrderDate, StringFormat={}{0:dd/MM/yyyy}}"
@@ -150,7 +150,7 @@
                                FontFamily="Myriad Pro"
                                FontWeight="Thin" />
                     <ComboBox x:Name="comboBoxOrderID"
-                              SelectedItem="{Binding SelectedOrder.OrderID}"
+                              SelectedItem="{Binding SelectedOrder.OrderId}"
                               Width="150"
                              />
                 </StackPanel>
@@ -163,7 +163,7 @@
                                FontFamily="Myriad Pro"
                                FontWeight="Thin"></TextBlock>
                     <ComboBox x:Name="comboBoxCustomerID"
-                              Text="{Binding SelectedOrder.CustomerID}"
+                              Text="{Binding SelectedOrder.CustomerId}"
                               Width="150"
                               />
                 </StackPanel>
@@ -176,7 +176,7 @@
                                FontFamily="Myriad Pro"
                                FontWeight="Thin"></TextBlock>
                     <ComboBox x:Name="comboBoxEmployeeID"
-                              Text="{Binding SelectedOrder.EmployeeID}"
+                              Text="{Binding SelectedOrder.EmployeeId}"
                               Width="150"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal"
