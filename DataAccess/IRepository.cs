@@ -13,5 +13,6 @@ namespace DataAccess
         // IEnumerabl;e<T> Get(Predicate<T> predicate);
         void Add(T t);
         void Delete(T t);
+
     }
 }

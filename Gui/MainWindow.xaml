@@ -367,7 +367,7 @@
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Product ID:"
-                                                DisplayMemberBinding="{Binding ProductID}"
+                                                DisplayMemberBinding="{Binding ProductId}"
                                                 Width="80" />
                                 <GridViewColumn Header="Quantity:"
                                                 DisplayMemberBinding="{Binding Quantity}"
@@ -397,7 +397,7 @@
                                FontFamily="Myriad Pro"
                                FontWeight="Thin"></TextBlock>
                     <TextBox x:Name="textBoxOrderDetailOrderID"
-                             Text="{Binding SelectedOrderDetail.OrderID}"
+                             Text="{Binding SelectedOrderDetail.OrderId}"
                              Width="150"
                              IsReadOnly="True"></TextBox>
                 </StackPanel>
@@ -411,7 +411,7 @@
                                FontFamily="Myriad Pro"
                                FontWeight="Thin" />
                     <TextBox x:Name="textBoxOrderDetailProductID"
-                             Text="{Binding SelectedOrderDetail.ProductID}"
+                             Text="{Binding SelectedOrderDetail.ProductId}"
                              Width="150"
                              IsReadOnly="True" />
                 </StackPanel>

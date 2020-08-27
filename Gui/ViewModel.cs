@@ -22,6 +22,7 @@ namespace Gui
             OrderRepository repository = new OrderRepository(context);
             IEnumerable<Orders> orders = repository.GetAll();
             Orders = new ObservableCollection<Orders>(orders);
+           
         }
         #endregion
 
@@ -38,6 +39,8 @@ namespace Gui
         {
             get; set;
         }
+        public ICollection<OrderDetails> SelectedOrderDetail { get; set; }
+ 
     }
 }
 #endregion

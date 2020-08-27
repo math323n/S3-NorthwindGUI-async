@@ -149,9 +149,6 @@ namespace Gui
         {
             
         
-
-         
-
             // Start repository
             await Task.Run(() => viewModel = new ViewModel());
             // Assign the viewModel to DataContext
