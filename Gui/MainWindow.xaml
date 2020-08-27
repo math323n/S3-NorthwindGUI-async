@@ -86,7 +86,7 @@
                             Content="New"
                             FontFamily="Myriad Pro"
                             FontWeight="Bold"
-                            Click="NewOrderButton_Click">
+                           >
                     </Button>
                 </StackPanel>
                 <StackPanel>

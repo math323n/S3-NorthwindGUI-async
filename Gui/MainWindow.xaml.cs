@@ -15,7 +15,7 @@ namespace Gui
     {
         #region fields
         protected ViewModel viewModel;
-        protected Repository repository;
+        protected Repository<NorthwindContext> repository;
         #endregion
 
         #region Constructor for MainWindow
@@ -71,7 +71,7 @@ namespace Gui
         /// Get comboBox items async
         /// </summary>
         /// <returns></returns>
-        private async Task GetComboBoxItemsASync()
+     /*   private async Task GetComboBoxItemsASync()
         {
             Dispatcher.Invoke(new Action(async delegate
             {
@@ -98,7 +98,7 @@ namespace Gui
                 await Task.Run(() => comboBoxShipVia.Items.Add(i));
             }
             }), DispatcherPriority.Normal);
-        }
+        }*/
         #endregion
 
         #region EventHandlers
@@ -107,7 +107,7 @@ namespace Gui
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void NewOrderButton_Click(object sender, RoutedEventArgs e)
+       /* private async void NewOrderButton_Click(object sender, RoutedEventArgs e)
         {
             List<OrderDetail> orderDetails = new List<OrderDetail>();
 
@@ -129,7 +129,7 @@ namespace Gui
             {
                 await Task.Run(() => MessageBox.Show(ex.Message));
             }
-        }
+        }*/
 
         /// <summary>
         /// Button EventHandler for editing an existing item in DataBase
@@ -156,8 +156,8 @@ namespace Gui
             DataContext = viewModel;
 
             // Start repository
-            repository = new Repository();
-           await repository.InitRepository();
+            Repository repo = new Repository(new NorthwindContext());
+            repo.InitRepository();
 
             /* ViewModel method for getting data, will link to GetAllOrdersAsync, 
              * then retrieves all orders async all the way.*/

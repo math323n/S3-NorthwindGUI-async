@@ -1,5 +1,7 @@
 ﻿using DataAccess;
 using Entities;
+
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;using System.Runtime.CompilerServices;
@@ -10,8 +12,8 @@ namespace Gui
     public class ViewModel: INotifyPropertyChanged
     {
         #region fields
-        protected Repository repository;
-        protected ObservableCollection<Order> orders;
+        protected Repository<NorthwindContext> repository;
+        protected ObservableCollection<Orders> orders;
         protected Order selectedOrder;
         protected OrderDetail selectedOrderDetail;
         #endregion
@@ -19,12 +21,12 @@ namespace Gui
         #region Constructor for ViewModel
         public ViewModel()
         {
-            repository = new Repository();
+            
         }
         #endregion
 
         #region Properties
-        public virtual ObservableCollection<Order> Orders
+        public virtual ObservableCollection<Orders> Orders
         {
             get
             {
@@ -64,8 +66,10 @@ namespace Gui
         #region Methods
         public virtual async Task InitializeAsync()
         {
+
+            List<Orders> orders = (List<Orders>)repository.GetAll();
             // Initialize ObservableCollections
-            Orders = new ObservableCollection<Order>(await repository.GetAllOrdersAsync());
+            Orders = new ObservableCollection<Orders>(orders);
         }
 
         // Represents the method that will handle the System.ComponentModel.INotifyPropertyChanged.PropertyChanged
