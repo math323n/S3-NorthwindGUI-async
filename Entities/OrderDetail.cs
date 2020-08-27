@@ -104,10 +104,7 @@ namespace Entities
         #endregion
 
         #region Methods
-        public override string ToString()
-        {
-            return $"ID: {orderID}\nUnitprice: {unitPrice}\nQuantity: {quantity}\nDiscount: {discount}";
-        }
+      
         #endregion
     }
 }
