@@ -68,7 +68,7 @@ namespace Gui
         }
 
         /// <summary>
-        /// Get comboBox items async
+        /// Get comboBox items async.
         /// </summary>
         /// <returns></returns>
         private void GetComboBoxItemsASync()
